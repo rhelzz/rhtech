@@ -4,15 +4,18 @@ import { useEffect } from 'react';
 
 const HeroSection = () => {
   useEffect(() => {
-    // Parallax effect
+    // Parallax effect dengan optimasi mobile
     const handleParallax = () => {
       const scrollY = window.scrollY;
       const parallaxElements = document.querySelectorAll('.parallax');
       
-      parallaxElements.forEach((element, index) => {
-        const speed = (index + 1) * 0.1;
-        element.style.transform = `translateY(${scrollY * speed}px)`;
-      });
+      // Hanya jalankan parallax di desktop
+      if (window.innerWidth > 768) {
+        parallaxElements.forEach((element, index) => {
+          const speed = (index + 1) * 0.1;
+          element.style.transform = `translateY(${scrollY * speed}px)`;
+        });
+      }
     };
 
     window.addEventListener('scroll', handleParallax, { passive: true });
@@ -47,12 +50,12 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex flex-col justify-center bg-gradient-to-br from-indigo-50 via-white to-purple-50 pt-16 sm:pt-20 pb-8">
-      {/* Background decorations */}
+    <section id="home" className="relative min-h-screen flex flex-col justify-center bg-gradient-to-br from-indigo-50 via-white to-purple-50 pt-16 sm:pt-20 pb-8 overflow-hidden">
+      {/* Background decorations - diperkecil di mobile */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="parallax absolute top-10 sm:top-20 left-10 sm:left-20 w-48 sm:w-72 h-48 sm:h-72 bg-primary/10 rounded-full blur-3xl"></div>
-        <div className="parallax absolute bottom-10 sm:bottom-20 right-10 sm:right-20 w-64 sm:w-96 h-64 sm:h-96 bg-secondary/10 rounded-full blur-3xl"></div>
-        <div className="parallax absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 sm:w-80 h-60 sm:h-80 bg-purple-200/20 rounded-full blur-3xl"></div>
+        <div className="parallax absolute top-10 sm:top-20 left-4 sm:left-20 w-32 sm:w-72 h-32 sm:h-72 bg-primary/10 rounded-full blur-2xl sm:blur-3xl"></div>
+        <div className="parallax absolute bottom-10 sm:bottom-20 right-4 sm:right-20 w-40 sm:w-96 h-40 sm:h-96 bg-secondary/10 rounded-full blur-2xl sm:blur-3xl"></div>
+        <div className="parallax absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 sm:w-80 h-48 sm:h-80 bg-purple-200/20 rounded-full blur-2xl sm:blur-3xl"></div>
       </div>
 
       <div className="relative z-10 flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
@@ -60,43 +63,43 @@ const HeroSection = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-7xl mx-auto text-center space-y-6 sm:space-y-8"
+          className="max-w-7xl mx-auto text-center space-y-4 sm:space-y-8 w-full"
         >
           {/* Greeting */}
           <motion.div variants={itemVariants}>
-            <span className="inline-block px-3 sm:px-4 py-2 bg-primary/10 text-primary rounded-full text-xs sm:text-sm font-medium mb-4">
+            <span className="inline-block px-3 sm:px-4 py-2 bg-primary/10 text-primary rounded-full text-xs sm:text-sm font-medium mb-2 sm:mb-4">
               👋 Hello, I'm
             </span>
           </motion.div>
 
-          {/* Main heading */}
+          {/* Main heading - improved mobile sizing */}
           <motion.h1 
             variants={itemVariants}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold font-serif text-gray-900 leading-tight"
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold font-serif text-gray-900 leading-tight px-2"
           >
             <span className="block">Creative</span>
             <span className="block text-primary">Developer</span>
           </motion.h1>
 
-          {/* Tagline */}
+          {/* Tagline - improved mobile spacing */}
           <motion.p 
             variants={itemVariants}
-            className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed px-4"
+            className="text-sm sm:text-lg md:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed px-4"
           >
             I craft beautiful digital experiences that merge creativity with functionality. 
             Specializing in modern web development and stunning user interfaces.
           </motion.p>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons - improved mobile layout */}
           <motion.div 
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mt-6 sm:mt-8 px-4"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mt-4 sm:mt-8 px-4 max-w-md sm:max-w-none mx-auto"
           >
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={scrollToPortfolio}
-              className="w-full sm:w-auto bg-primary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="w-full sm:w-auto bg-primary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-lg font-semibold hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               View My Work
             </motion.button>
@@ -104,16 +107,16 @@ const HeroSection = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="w-full sm:w-auto border-2 border-primary text-primary px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold hover:bg-primary hover:text-white transition-all duration-300"
+              className="w-full sm:w-auto border-2 border-primary text-primary px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-lg font-semibold hover:bg-primary hover:text-white transition-all duration-300"
             >
               Hire Me
             </motion.button>
           </motion.div>
 
-          {/* Social Links */}
+          {/* Social Links - improved mobile sizing */}
           <motion.div 
             variants={itemVariants}
-            className="flex justify-center space-x-4 sm:space-x-6 mt-6 sm:mt-8"
+            className="flex justify-center space-x-4 sm:space-x-6 mt-4 sm:mt-8"
           >
             {[
               { icon: Github, href: '#', label: 'GitHub' },
@@ -125,10 +128,10 @@ const HeroSection = () => {
                 href={href}
                 whileHover={{ scale: 1.2, y: -2 }}
                 whileTap={{ scale: 0.9 }}
-                className="p-2 sm:p-3 bg-white rounded-full shadow-md hover:shadow-lg text-gray-600 hover:text-primary transition-all duration-300"
+                className="p-2 sm:p-3 bg-white rounded-full shadow-md hover:shadow-lg text-gray-600 hover:text-primary transition-all duration-300 flex-shrink-0"
                 aria-label={label}
               >
-                <Icon size={20} />
+                <Icon size={18} />
               </motion.a>
             ))}
           </motion.div>
@@ -148,7 +151,7 @@ const HeroSection = () => {
           className="text-gray-400 cursor-pointer"
           onClick={() => document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' })}
         >
-          <ArrowDown size={20} />
+          <ArrowDown size={18} />
         </motion.div>
       </motion.div>
     </section>
