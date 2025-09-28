@@ -28,6 +28,19 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Prevent content from going under navbar on mobile */
+section {
+  scroll-margin-top: 4rem;
+}
+
+@media (min-width: 640px) {
+  section {
+    scroll-margin-top: 5rem;
+  }
 }
 
 img,
@@ -66,6 +79,7 @@ h6 {
 
 #root {
   isolation: isolate;
+  min-height: 100vh;
 }
 
 /* Utility Classes */
@@ -98,20 +112,62 @@ html {
   color: white;
 }
 
-/* Scrollbar styles */
+/* Scrollbar styles - pastikan scrollbar terlihat */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
+}
+
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
 }
 
 ::-webkit-scrollbar-track {
   background: #f7fafc;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #6366f1;
   border-radius: 4px;
+  border: 1px solid #f7fafc;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #4f46e5;
+}
+
+::-webkit-scrollbar-corner {
+  background: #f7fafc;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  /* Prevent zoom on input focus on iOS */
+  input[type="text"],
+  input[type="email"],
+  textarea,
+  select {
+    font-size: 16px;
+  }
+  
+  /* Improve touch targets */
+  button,
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Pastikan scrolling tetap bisa di mobile */
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Pastikan tidak ada elemen yang menghalangi scroll */
+.parallax {
+  pointer-events: none;
 }

@@ -15,7 +15,7 @@ const HeroSection = () => {
       });
     };
 
-    window.addEventListener('scroll', handleParallax);
+    window.addEventListener('scroll', handleParallax, { passive: true });
     return () => window.removeEventListener('scroll', handleParallax);
   }, []);
 
@@ -47,24 +47,24 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-purple-50">
+    <section id="home" className="relative min-h-screen flex flex-col justify-center bg-gradient-to-br from-indigo-50 via-white to-purple-50 pt-16 sm:pt-20 pb-8">
       {/* Background decorations */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="parallax absolute top-20 left-20 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
-        <div className="parallax absolute bottom-20 right-20 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
-        <div className="parallax absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-purple-200/20 rounded-full blur-3xl"></div>
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="parallax absolute top-10 sm:top-20 left-10 sm:left-20 w-48 sm:w-72 h-48 sm:h-72 bg-primary/10 rounded-full blur-3xl"></div>
+        <div className="parallax absolute bottom-10 sm:bottom-20 right-10 sm:right-20 w-64 sm:w-96 h-64 sm:h-96 bg-secondary/10 rounded-full blur-3xl"></div>
+        <div className="parallax absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 sm:w-80 h-60 sm:h-80 bg-purple-200/20 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="relative z-10 flex-1 flex items-center justify-center">
+      <div className="relative z-10 flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="space-y-8"
+          className="max-w-7xl mx-auto text-center space-y-6 sm:space-y-8"
         >
           {/* Greeting */}
           <motion.div variants={itemVariants}>
-            <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+            <span className="inline-block px-3 sm:px-4 py-2 bg-primary/10 text-primary rounded-full text-xs sm:text-sm font-medium mb-4">
               👋 Hello, I'm
             </span>
           </motion.div>
@@ -72,7 +72,7 @@ const HeroSection = () => {
           {/* Main heading */}
           <motion.h1 
             variants={itemVariants}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold font-serif text-gray-900 leading-tight text-center"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold font-serif text-gray-900 leading-tight"
           >
             <span className="block">Creative</span>
             <span className="block text-primary">Developer</span>
@@ -81,7 +81,7 @@ const HeroSection = () => {
           {/* Tagline */}
           <motion.p 
             variants={itemVariants}
-            className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed text-center"
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed px-4"
           >
             I craft beautiful digital experiences that merge creativity with functionality. 
             Specializing in modern web development and stunning user interfaces.
@@ -90,13 +90,13 @@ const HeroSection = () => {
           {/* CTA Buttons */}
           <motion.div 
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mt-6 sm:mt-8 px-4"
           >
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={scrollToPortfolio}
-              className="bg-primary text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="w-full sm:w-auto bg-primary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               View My Work
             </motion.button>
@@ -104,7 +104,7 @@ const HeroSection = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="border-2 border-primary text-primary px-8 py-4 rounded-full text-lg font-semibold hover:bg-primary hover:text-white transition-all duration-300"
+              className="w-full sm:w-auto border-2 border-primary text-primary px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold hover:bg-primary hover:text-white transition-all duration-300"
             >
               Hire Me
             </motion.button>
@@ -113,7 +113,7 @@ const HeroSection = () => {
           {/* Social Links */}
           <motion.div 
             variants={itemVariants}
-            className="flex justify-center space-x-6 mt-8"
+            className="flex justify-center space-x-4 sm:space-x-6 mt-6 sm:mt-8"
           >
             {[
               { icon: Github, href: '#', label: 'GitHub' },
@@ -125,10 +125,10 @@ const HeroSection = () => {
                 href={href}
                 whileHover={{ scale: 1.2, y: -2 }}
                 whileTap={{ scale: 0.9 }}
-                className="p-3 bg-white rounded-full shadow-md hover:shadow-lg text-gray-600 hover:text-primary transition-all duration-300"
+                className="p-2 sm:p-3 bg-white rounded-full shadow-md hover:shadow-lg text-gray-600 hover:text-primary transition-all duration-300"
                 aria-label={label}
               >
-                <Icon size={24} />
+                <Icon size={20} />
               </motion.a>
             ))}
           </motion.div>
@@ -140,7 +140,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.5, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-10"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
@@ -148,18 +148,8 @@ const HeroSection = () => {
           className="text-gray-400 cursor-pointer"
           onClick={() => document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' })}
         >
-          <ArrowDown size={24} />
+          <ArrowDown size={20} />
         </motion.div>
-      </motion.div>
-
-      {/* Hero Image/Illustration */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.8, duration: 1 }}
-        className="absolute right-10 top-1/2 transform -translate-y-1/2 hidden lg:block"
-      >
-        <div className="w-80 h-80 bg-gradient-to-br from-primary to-secondary rounded-full opacity-20 blur-xl"></div>
       </motion.div>
     </section>
   );
