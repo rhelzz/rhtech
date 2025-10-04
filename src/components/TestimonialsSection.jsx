@@ -183,11 +183,17 @@ const TestimonialsSection = () => {
               <button
                 key={index}
                 onClick={() => setCurrentTestimonial(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                   index === currentTestimonial
-                    ? 'bg-primary scale-125'
+                    ? 'bg-primary'
                     : 'bg-gray-300 hover:bg-gray-400'
                 }`}
+                style={{
+                  minWidth: '0.5rem',
+                  minHeight: '0.5rem',
+                  maxWidth: '0.75rem',
+                  maxHeight: '0.75rem',
+                }}
               />
             ))}
           </div>
